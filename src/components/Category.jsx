@@ -2,6 +2,26 @@ import { useState } from 'react';
 
 const CategoryForm = () => {
   const [isShow, setIsShow] = useState(false);
+  const [categoryFormData, setCategoaryFormData] = useState({
+    title: '',
+    description: '',
+  });
+  const [categories, setCategories] = useState([]);
+
+  const changeHandler = ({ target }) => {
+    const { name, value } = target;
+    console.log(categoryFormData);
+    setCategoaryFormData({ ...categoryFormData, [name]: value });
+  };
+  const addNewCategoryHandler = (e) => {
+    e.preventDefault();
+    const newCategories = {
+      ...categoryFormData,
+      createAt: new Date().toISOString(),
+    };
+    setCategories([...categories, newCategories]);
+    setCategoaryFormData({ title: '', description: '' });
+  };
   return (
     <section>
       <div
@@ -13,29 +33,36 @@ const CategoryForm = () => {
         </h2>
         <form className="bg-slate-700 p-4 rounded-xl flex flex-col gap-y-4 shadow-2xl">
           <div>
-            <label for="category-title" className="text-slate-400 block mb-1">
+            <label
+              htmlFor="category-title"
+              className="text-slate-400 block mb-1"
+            >
               Category Title
             </label>
             <input
               type="text"
-              name="category-title"
+              name="title"
               id="category-title"
               className="bg-transparent border rounded-xl border-slate-500 text-slate-400 w-full md:w-auto"
               placeholder="title..."
+              value={categoryFormData.title}
+              onChange={changeHandler}
             />
           </div>
           <div>
             <label
-              for="category-description"
+              htmlFor="category-description"
               className="text-slate-400 block mb-1"
             >
               Category description
             </label>
             <textarea
-              type="text"
-              name="category-description "
+              className="bg-transparent rounded-xl border border-slate-500 text-slate-400 w-full"
+              type=" text"
+              name="description"
               id="category-description"
-              className="bg-transparent border rounded-xl border-slate-400 text-slate-600 w-full"
+              value={categoryFormData.description}
+              onChange={changeHandler}
             ></textarea>
           </div>
 
@@ -51,6 +78,7 @@ const CategoryForm = () => {
               Cancle
             </button>
             <button
+              onClick={addNewCategoryHandler}
               type="submit"
               id="add-new-category"
               className="flex-1 py-2 border-none rounded-xl text-white bg-slate-500"
