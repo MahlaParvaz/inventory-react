@@ -1,16 +1,15 @@
 import { useState } from 'react';
 
-const CategoryForm = () => {
+const CategoryForm = ({ setCategories }) => {
   const [isShow, setIsShow] = useState(false);
   const [categoryFormData, setCategoaryFormData] = useState({
     title: '',
     description: '',
   });
-  const [categories, setCategories] = useState([]);
 
   const changeHandler = ({ target }) => {
     const { name, value } = target;
-    console.log(categoryFormData);
+    // console.log(categoryFormData);
     setCategoaryFormData({ ...categoryFormData, [name]: value });
   };
   const addNewCategoryHandler = (e) => {
@@ -18,8 +17,9 @@ const CategoryForm = () => {
     const newCategories = {
       ...categoryFormData,
       createAt: new Date().toISOString(),
+      id: new Date().getTime(),
     };
-    setCategories([...categories, newCategories]);
+    setCategories((prevState) => [...prevState, newCategories]);
     setCategoaryFormData({ title: '', description: '' });
   };
   return (
