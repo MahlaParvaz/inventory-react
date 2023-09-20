@@ -39,6 +39,24 @@ function App() {
       }
     });
   };
+
+  useEffect(() => {
+    const savedProducts = JSON.parse(localStorage.getItem('products')) || [];
+    const savedCategories = JSON.parse(localStorage.getItem('categories')) || [];
+    setProducts(savedProducts);
+    setCategories(savedCategories);
+  }, []);
+  useEffect(() => {
+    if (products.length) {
+      localStorage.setItem('products', JSON.stringify(products));
+    }
+  }, [products]);
+  useEffect(() => {
+    if (categories.length) {
+      localStorage.setItem('categories', JSON.stringify(categories));
+    }
+  }, [categories]);
+
   return (
     <div>
       <div className="bg-slate-800 min-h-screen">

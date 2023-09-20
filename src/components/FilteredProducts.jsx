@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 const FilteredProducts = ({ sort, search, onSort, onSearch }) => {
   return (
     <div>
+        
       <div className="flex items-center justify-between mb-6">
         <label htmlFor="search-input" className="text-slate-500 text-lg">
           search

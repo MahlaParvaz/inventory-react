@@ -8,7 +8,7 @@ const ProductsList = ({ products, setProducts, categories }) => {
   };
   return (
     <div>
-      <h2>Product List</h2>
+      <h2 class="text-xl text-slate-300 font-bold mb-2">Product list</h2>
       {products.map((product) => {
         return (
           <div
